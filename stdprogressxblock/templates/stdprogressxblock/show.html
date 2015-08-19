@@ -1,6 +1,13 @@
 <% 
-    course_progress = int((float(items_completed_in_course) / items_in_course) * 100) 
-    section_progress = int((float(items_completed_in_section) / items_in_section) * 100)
+    if items_in_course == 0:
+        course_progress = 0
+    else:
+        course_progress = int((float(items_completed_in_course) / items_in_course) * 100) 
+    
+    if items_in_section == 0:
+        section_progress = 0
+    else:
+        section_progress = int((float(items_completed_in_section) / items_in_section) * 100)
 
     if video_count == 0:
         video_progress = "N/A"
