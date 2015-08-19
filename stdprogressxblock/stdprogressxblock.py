@@ -32,8 +32,8 @@ class StdProgXBlock(XBlock):
     """
 
     MODULES_TO_IGNORE = [
-        "chapter", "sequential", "course", "vertical",
-        "stdprogressxblock", "about"
+        "about","chapter","course","html","sequential","static_tab",
+        "vertical","course_info","discussion","videoalpha","stdprogressxblock"
     ]
 
     display_name = String(
@@ -77,9 +77,7 @@ class StdProgXBlock(XBlock):
         """
 
         xblock_locator = self.location
-        print "xblock_locator=====>",xblock_locator
         vertical_location = modulestore().get_parent_location(xblock_locator)
-        print "vertical_location======>",vertical_location
         sequential_location = modulestore().get_parent_location(
             vertical_location
         )
@@ -105,18 +103,6 @@ class StdProgXBlock(XBlock):
                     block_type, block_location
                 )
 
-                # print "block_type =>", block_type
-                # print "block_location =>", block_location
-                # print "status =>", status
-
-                # if str(block_location) == str("i4x://myorg/MC007/flexible_grader/0bfcc30aada64e6195d7c47a012a35a3"):
-                #     vert_loc = modulestore().get_parent_location(block_location)
-                #     seq_loc = modulestore().get_parent_location(vert_loc)
-                #     # chap_loc = modulestore().get_parent_location(seq_loc)
-                #     print "vert_loc =>", vert_loc
-                #     print "seq_loc =>", seq_loc
-                #     # print "chap_loc =>", chap_loc.display_name
-
                 items_completed_in_course += status
 
         items_in_section = 0
@@ -139,9 +125,6 @@ class StdProgXBlock(XBlock):
         for module_descriptor in yield_descendents(chapter, None):
             block_type = module_descriptor.scope_ids.block_type
             block_location = module_descriptor.location
-
-            print "module_descriptor =>", block_type
-            print "module_descriptor.location =>", block_location
 
             if block_type not in self.MODULES_TO_IGNORE:
                 items_in_section += 1
@@ -215,9 +198,6 @@ class StdProgXBlock(XBlock):
 
         if module_id:
             filter_dict["module_state_key"] = module_id
-
-        print "module_type={0}, module_id={1}".format(module_type, module_id)
-        print "filter_dict={0}".format(filter_dict)
 
         modules_count = StudentModule.objects.filter(**filter_dict).count()
         completion_status = modules_count
