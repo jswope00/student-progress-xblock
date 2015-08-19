@@ -1,0 +1,153 @@
+/* CSS for StdProgXBlock */
+#stdprog ul{
+  padding-left : 0em;
+}
+
+#stdprog ul li {
+  width: 100%;
+  float: left;
+  list-style: none;
+}
+
+#stdprog ul li.double-col {
+  width: 49%;
+  list-style: none;
+}
+
+#stdprog ul li.double-col-left {
+  float: left;
+}
+
+#stdprog ul li.double-col-right {
+  float: right;
+}
+/* 
+ * Determinate progress bar
+ * ------------------------
+ */
+
+#stdprog progress[value] {
+  /* Override the default appearence */
+  
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* Gets rid of the default border in Firefox and Opera. */
+  
+  border: none;
+  /* Dimensions */
+  
+  width: 100%;
+  height: 25px;
+  /* For IE10 only */
+  
+  color: #96D23B;
+  /* Firefox only (for container) */
+  
+  background-color: #fff;
+  border-radius: 0;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.25) inset;
+}
+/* 
+ * Webkit browsers only - Progress bar container
+ * ---------------------------------------------
+ */
+
+#stdprog progress[value]::-webkit-progress-bar {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.25) inset;
+  position: relative;
+}
+/* 
+ * Webkit browsers only - Progress bar value
+ * -----------------------------------------
+ */
+
+#stdprog progress[value]::-webkit-progress-value {
+  border-radius: 0;
+  background-size: 35px 20px, 100% 100%, 100% 100%;
+  position: relative;
+  -webkit-animation: animate-stripes 5s linear infinite;
+  animation: animate-stripes 5s linear infinite;
+  background: #c3d69b;
+}
+/* 
+ * Webkit browsers only - Pseudo elements
+ * --------------------------------------
+ */
+
+/*progress[value]::-webkit-progress-value:after {
+  position: absolute;
+  content: '';
+  width: 6px;
+  height: 6px;
+  right: 7px;
+  top: 7px;
+  border-radius: 100%;
+  background-color: rgba(255, 255, 255, 1);
+}*/
+
+#stdprog progress[value]::-webkit-progress-value:before {
+  position: absolute;
+  right: 0;
+  top: -125%;
+}
+/* 
+ * Firefox only - Progress bar value
+ * ---------------------------------
+ */
+
+#stdprog progress[value]::-moz-progress-bar {
+  border-radius: 2px;
+  background-size: 35px 20px, 100% 100%, 100% 100%;
+  position: relative;
+  background: #c3d69b;
+}
+/* 
+ * HTML Fallback Technique
+ * -----------------------
+ */
+
+#stdprog p[data-value] {
+  position: relative;
+  line-height: 200%;
+  margin: 0.5em 0 0;
+  color: #666;
+
+}
+
+#stdprog p[data-value]:after {
+  content: attr(data-value) "%";
+  position: absolute;
+  right: 0;
+}
+
+#stdprog .double-col p[data-value]:after {
+  content: attr(data-value);
+  position: absolute;
+  right: 0;
+}
+#stdprog .divider{
+background: #2989F5 none repeat scroll 0% 0%;
+height: 6px;
+width: 100%;
+border-bottom: 3px solid #B7B5B5;
+margin: 2px 0px 10px;}
+
+#stdprog .row{
+  display: inline-block;
+  width: 100%;
+}
+
+#stdprog{
+  min-height: 20px;
+  padding: 19px;
+  margin-bottom: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+  padding-bottom: 1.5em;
+}

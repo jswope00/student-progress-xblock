@@ -1,0 +1,79 @@
+<% 
+    course_progress = int((float(items_completed_in_course) / items_in_course) * 100) 
+    section_progress = int((float(items_completed_in_section) / items_in_section) * 100)
+
+    if video_count == 0:
+        video_progress = "N/A"
+        video_progress_percent = 0
+    else:
+        video_progress = "{0}/{1}".format(video_completed_count, video_count)
+        video_progress_percent = int((float(video_completed_count) / video_count) * 100)
+
+    if problem_count == 0:
+        problem_progress = "N/A"
+        problem_progress_percent = 0
+    else:
+        problem_progress = "{0}/{1}".format(problem_completed_count, problem_count)
+        problem_progress_percent = int((float(problem_completed_count) / problem_count) * 100)
+
+    if submission_count == 0:
+        submission_progress = "N/A"
+        submission_progress_percent = 0
+    else:
+        submission_progress = "{0}/{1}".format(submission_completed_count, submission_count)
+        submission_progress_percent = int((float(submission_completed_count) / submission_count) * 100)
+
+    if other_count == 0:
+        other_progress = "N/A"
+        other_progress_percent = 0
+    else:
+        other_progress = "{0}/{1}".format(other_completed_count, other_count)
+        other_progress_percent = int((float(other_completed_count) / other_count) * 100)
+%>
+
+<!--
+<div class="stdprogressxblock_block">
+    <p>Course Progress:
+        <span class='course-progress'>${course_progress}</span></br>
+        <hr /> Section Progress:
+        <span class='section-progress'>${section_progress}</span></br>
+        Videos: <span class='video-progress'>${video_progress}</span></br>
+        Problems: <span class='problem-progress'>${problem_progress}</span></br>
+        Submissions: <span class='submission-progress'>${submission_progress}</span></br>
+        Other: <span class='other-progress'>${other_progress}</span></br>
+    </p>
+</div>
+-->
+
+<div id="stdprog" style="">
+    <div class="row">
+        <ul>
+            <li style="margin-bottom:0">
+                <p data-value="${course_progress}" style="margin-bottom:0">Course Progress</p>
+                <div class="divider"></div>
+                <progress class="course-progress" value="${course_progress}" max="100">
+                </progress>
+                <p data-value="${section_progress}" style="margin-bottom:0">Section Progress</p>
+                <div class="divider"></div>
+                <progress class="sel-progess" value="${section_progress}" max="100">
+                </progress>
+            </li>
+            <li class="double-col double-col-left">
+                <p data-value="${video_progress}" style="margin-bottom:0">Video</p>
+                <progress class="video" value="${video_progress_percent}" max="100">
+                </progress>
+                <p data-value="${problem_progress}" style="margin-bottom:0">Problems</p>
+                <progress class="problems" value="${problem_progress_percent}" max="100">
+                </progress>
+            </li>
+            <li class="double-col double-col-right">
+                <p data-value="${submission_progress}" style="margin-bottom:0">Submissions</p>
+                <progress class="submissions" value="${submission_progress_percent}" max="100">
+                </progress>
+                <p data-value="${other_progress}" style="margin-bottom:0">Others</p>
+                <progress class="others" value="${other_progress_percent}" max="100">
+                </progress>
+            </li>
+        </ul>
+    </div>
+</div>
