@@ -186,7 +186,7 @@ class StdProgXBlock(XBlock):
             filter_dict["state__contains"] = "comment"
         elif module_type == "problem":
             # Module state is valid contain done:true.
-            filter_dict["state__contains"] = "done"
+            filter_dict["state__contains"] = "done\": true"
         elif  module_type == "openassessment":
             # Module state contain a valid submission_uuid.
             filter_dict["state__contains"] = "submission_uuid"
