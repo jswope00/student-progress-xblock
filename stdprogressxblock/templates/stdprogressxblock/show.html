@@ -38,49 +38,45 @@
         other_progress_percent = int((float(other_completed_count) / other_count) * 100)
 %>
 
-<!--
-<div class="stdprogressxblock_block">
-    <p>Course Progress:
-        <span class='course-progress'>${course_progress}</span></br>
-        <hr /> Section Progress:
-        <span class='section-progress'>${section_progress}</span></br>
-        Videos: <span class='video-progress'>${video_progress}</span></br>
-        Problems: <span class='problem-progress'>${problem_progress}</span></br>
-        Submissions: <span class='submission-progress'>${submission_progress}</span></br>
-        Other: <span class='other-progress'>${other_progress}</span></br>
-    </p>
-</div>
--->
-
 <div id="stdprog" style="">
     <div class="row">
         <ul>
-            <li style="margin-bottom:0">
-                <p data-value="${course_progress}" style="margin-bottom:0">Course Progress</p>
-                <div class="divider"></div>
-                <progress class="course-progress" value="${course_progress}" max="100">
-                </progress>
-                <p data-value="${section_progress}" style="margin-bottom:0">Section Progress</p>
-                <div class="divider"></div>
-                <progress class="sel-progess" value="${section_progress}" max="100">
-                </progress>
-            </li>
-            <li class="double-col double-col-left">
-                <p data-value="${video_progress}" style="margin-bottom:0">Video</p>
-                <progress class="video" value="${video_progress_percent}" max="100">
-                </progress>
-                <p data-value="${problem_progress}" style="margin-bottom:0">Problems</p>
-                <progress class="problems" value="${problem_progress_percent}" max="100">
-                </progress>
-            </li>
-            <li class="double-col double-col-right">
-                <p data-value="${submission_progress}" style="margin-bottom:0">Submissions</p>
-                <progress class="submissions" value="${submission_progress_percent}" max="100">
-                </progress>
-                <p data-value="${other_progress}" style="margin-bottom:0">Others</p>
-                <progress class="others" value="${other_progress_percent}" max="100">
-                </progress>
-            </li>
+        % if show_course_progress :
+            <div id="course_progress_div">
+                <li style="margin-bottom:0">
+                    <p data-value="${course_progress}" style="margin-bottom:0">Course Progress</p>
+                    <div class="divider"></div>
+                    <progress class="course-progress" value="${course_progress}" max="100">
+                    </progress>
+                </li>
+            </div>
+        % endif 
+        % if show_section_progress :
+            <div id="section_progress_div">
+                <li>
+                    <p data-value="${section_progress}" style="margin-bottom:0">Section Progress</p>
+                    <div class="divider"></div>
+                    <progress class="sel-progess" value="${section_progress}" max="100">
+                    </progress>
+                </li>
+                <li class="double-col double-col-left">
+                    <p data-value="${video_progress}" style="margin-bottom:0">Video</p>
+                    <progress class="video" value="${video_progress_percent}" max="100">
+                    </progress>
+                    <p data-value="${problem_progress}" style="margin-bottom:0">Problems</p>
+                    <progress class="problems" value="${problem_progress_percent}" max="100">
+                    </progress>
+                </li>
+                <li class="double-col double-col-right">
+                    <p data-value="${submission_progress}" style="margin-bottom:0">Submissions</p>
+                    <progress class="submissions" value="${submission_progress_percent}" max="100">
+                    </progress>
+                    <p data-value="${other_progress}" style="margin-bottom:0">Others</p>
+                    <progress class="others" value="${other_progress_percent}" max="100">
+                    </progress>
+                </li>
+            </div>
+        % endif
         </ul>
     </div>
 </div>

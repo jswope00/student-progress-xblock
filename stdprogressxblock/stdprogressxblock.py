@@ -12,7 +12,7 @@ from webob.response import Response
 
 from xblock.core import XBlock
 from xblock.exceptions import JsonHandlerError
-from xblock.fields import Scope, Integer, String, Float
+from xblock.fields import Scope, Integer, String, Float, Boolean
 from xblock.fragment import Fragment
 
 from xmodule.modulestore.django import modulestore
@@ -43,6 +43,30 @@ class StdProgXBlock(XBlock):
              "the page.",
         scope=Scope.settings,
     )
+    course_progress = Boolean(help="Show course progress", default=True, scope=Scope.settings)
+    section_progress = Boolean(help="Show section progress", default=True, scope=Scope.settings)
+
+    def studio_view(self, context):
+        """
+        Create a fragment used to display the edit view in the Studio.
+        """
+        context = {}
+        context["show_course_progress"] = self.course_progress
+        context["show_section_progress"] = self.section_progress
+        frag = Fragment()
+        frag.add_content(
+            render_template(
+                'static/html/edit.html',
+                context
+            )
+        )
+        frag.add_javascript(
+            load_resource("static/js/src/edit.js")
+        )
+
+        frag.initialize_js('StdProgXBlock')
+
+        return frag
 
     def student_view(self, context=None):
         """
@@ -52,7 +76,8 @@ class StdProgXBlock(XBlock):
         context = {}
         progress = self.get_progress_data()
         context.update(progress)
-        
+        context["show_course_progress"] = self.course_progress
+        context["show_section_progress"] = self.section_progress
         frag = Fragment()
         frag.add_content(
             render_template(
@@ -203,6 +228,16 @@ class StdProgXBlock(XBlock):
         completion_status = modules_count
 
         return completion_status
+
+    @XBlock.json_handler
+    def studio_submit(self, data, suffix=''):
+        """
+        Called when submitting the form in Studio.
+        """
+        self.course_progress = data.get('course_progress')
+        self.section_progress = data.get('section_progress')
+
+        return {'result': 'success'}
 
 def load_resource(resource_path):
     """
