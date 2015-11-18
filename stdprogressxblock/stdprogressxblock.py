@@ -22,7 +22,7 @@ from xmodule.modulestore import ModuleStoreEnum
 
 from opaque_keys.edx.locations import SlashSeparatedCourseKey
 
-from courseware.grades import yield_dynamic_descriptor_descendents as yield_descendents
+from courseware.grades import yield_dynamic_descriptor_descendants as yield_descendants
 
 log = logging.getLogger(__name__)
 
@@ -147,7 +147,7 @@ class StdProgXBlock(XBlock):
 
         chapter = modulestore().get_item(chapter_location)
 
-        for module_descriptor in yield_descendents(chapter, None):
+        for module_descriptor in yield_descendants(chapter, None, None):
             block_type = module_descriptor.scope_ids.block_type
             block_location = module_descriptor.location
 
